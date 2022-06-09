@@ -1,0 +1,13 @@
+@use 'sass:math';
+@use 'sass:color';
+
+@import "fonts";
+@import "vars";
+
+
+@import "swiper/css/bundle";
+
+@import "tailwind";
+
+@import "blocks/header";
+@import "blocks/banner";

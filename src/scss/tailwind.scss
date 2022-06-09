@@ -1,0 +1,46 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// Custom Classes
+.flex-center{
+	@apply flex items-center justify-center;
+}
+
+.flex-x-center{
+	@apply flex justify-center;
+}
+
+.flex-y-center{
+	@apply flex items-center;
+}
+
+// Swiper Slider
+.swiper-pagination-bullet{
+	@apply bg-white opacity-100;
+}
+
+.swiper-pagination-bullet-active{
+	@apply bg-secondBlue;
+}
+
+.swiper-button-next, .swiper-button-prev{
+	@apply w-10 h-10  sm:w-16 sm:h-16 bg-black bg-opacity-40 text-white duration-300 hover:bg-opacity-50;
+	&:after{
+		@apply text-base sm:text-xl font-bold;
+	}
+}
+
+.swiper-button-prev{
+	@apply left-0;
+}
+
+.swiper-button-next{
+	@apply right-0;
+}
+
+.swiper-lazy-preloader{
+	@apply border-accent border-t-transparent;
+}
+
+// 	

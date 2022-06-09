@@ -1,0 +1,43 @@
+.banner-slide{
+	position: relative;
+	padding-bottom: 56.25%;
+	visibility: hidden;
+	&.swiper-slide-active{
+		visibility: visible;
+		.note{
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+	@media (max-width: 768px) and (min-height: 600px) {
+		padding-bottom: 100%;
+	}
+	@media (max-width: 567px){
+		padding-bottom: 110%;
+	}
+	&:after{
+		content: '';
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-color: rgba(#000, .3);
+	}
+	.note{
+		transform: translateX(-100%);
+		opacity: 0;
+		transition: transform .8s ease;
+	}
+	picture, img, video, .banner-image-slide-bg{
+		object-fit: cover;
+		object-position: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;	
+	}
+}
