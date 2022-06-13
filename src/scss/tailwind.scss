@@ -43,4 +43,22 @@
 	@apply border-accent border-t-transparent;
 }
 
+strong{
+	@apply font-semibold;
+}
+
+.section{
+	@apply py-20;
+	h2{
+		font-size: calc($index * 2.1);
+		text-align: center;
+		font-weight: 600;
+	}
+	.descr-section{
+		font-weight: normal;
+		text-align: center;
+		font-size: calc($index * 0.9);
+	}
+}
+
 // 	
