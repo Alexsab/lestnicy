@@ -48,7 +48,7 @@ strong{
 }
 
 .section{
-	@apply py-20;
+	@apply py-14 md:py-20;
 	h2{
 		font-size: calc($index * 2.1);
 		text-align: center;
@@ -57,7 +57,7 @@ strong{
 	.descr-section{
 		font-weight: normal;
 		text-align: center;
-		font-size: calc($index * 0.9);
+		font-size: calc($index * 1);
 	}
 }
 
