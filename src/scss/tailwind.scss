@@ -43,6 +43,10 @@
 	@apply border-accent border-t-transparent;
 }
 
+.no-scroll{
+	@apply overflow-y-hidden;
+}
+
 strong{
 	@apply font-semibold;
 }

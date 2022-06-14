@@ -1,4 +1,3 @@
-
 const setImagesHeight = () => {
 	const images = document.querySelectorAll('.galary-item');
 	if(images.length){
