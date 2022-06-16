@@ -3,6 +3,7 @@ const menuBtn = document.getElementById('nav-icon2');
 menuBtn.addEventListener('click', () => {
 	toggleClasses()
 })
+
 const setMenuHeight = () => {
 	if(window.innerWidth < 768){
 		let a = document.querySelector('header').offsetHeight;
@@ -11,8 +12,6 @@ const setMenuHeight = () => {
 		menu.style = '';
 	}
 }
-setMenuHeight();
-window.addEventListener('resize', setMenuHeight);
 
 const toggleClasses = () => {
 	menuBtn.classList.toggle('open')
@@ -43,4 +42,6 @@ const scroll = () => {
 		})
 	}
 }
-scroll()
+setMenuHeight();
+window.addEventListener('resize', setMenuHeight);
+scroll();

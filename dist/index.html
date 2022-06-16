@@ -146,12 +146,8 @@
 								<div
 									class="banner-text absolute top-6 bottom-8 sm:top-14 sm:bottom-14 left-0 right-0 z-10 text-white opacity-0"
 									data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out">
-									<h2 class="text-3xl md:text-6xl font-bold mb-3 pl-10 xl:pl-20 pr-5 xl:w-2/3 !leading-[1.3]">Лестницы
-										в&nbsp;Самаре под&nbsp;ключ от&nbsp;45000&nbsp;руб.</h2>
-									<p class="text-lg sm:text-2xl md:text-3xl pl-10 xl:pl-20 pr-5 xl:w-2/3">Наличие собственного
-										транспорта
-										позволяет
-										осуществить быструю доставку</p>
+									<h2 class="text-3xl md:text-6xl font-bold mb-3 pl-10 xl:pl-20 pr-5 xl:w-2/3 !leading-[1.3]">Лестницы в&nbsp;Самаре под&nbsp;ключ от&nbsp;45000&nbsp;руб.</h2>
+									<p class="text-lg sm:text-2xl md:text-3xl pl-10 xl:pl-20 pr-5 xl:w-2/3">Наличие собственного транспорта позволяет осуществить быструю доставку</p>
 								</div>
 							</div>
 							<div class="banner-slide swiper-slide md:h-full w-full">
@@ -164,12 +160,8 @@
 								<div
 									class="banner-text absolute top-6 bottom-8 sm:top-14 sm:bottom-14 left-0 right-0 z-10 text-white opacity-0"
 									data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out">
-									<h2 class="text-3xl md:text-6xl font-bold mb-3 pl-10 xl:pl-20 pr-5 xl:w-2/3 !leading-[1.3]">Лестницы
-										в&nbsp;Самаре под&nbsp;ключ от&nbsp;45000&nbsp;руб.</h2>
-									<p class="text-lg sm:text-2xl md:text-3xl pl-10 xl:pl-20 pr-5 xl:w-2/3">Наличие собственного
-										транспорта
-										позволяет
-										осуществить быструю доставку</p>
+									<h2 class="text-3xl md:text-6xl font-bold mb-3 pl-10 xl:pl-20 pr-5 xl:w-2/3 !leading-[1.3]">Лестницы в&nbsp;Самаре под&nbsp;ключ от&nbsp;45000&nbsp;руб.</h2>
+									<p class="text-lg sm:text-2xl md:text-3xl pl-10 xl:pl-20 pr-5 xl:w-2/3">Наличие собственного транспорта позволяет осуществить быструю доставку</p>
 								</div>
 							</div>
 						</div>
@@ -208,11 +200,18 @@
 							<button
 								class="text-base w-full md:w-[32%] lg:w-full text-white font-bold px-5 py-3 lg:py-4 border border-transparent block rounded-0 outline-none lg:w-full lg:mt-7 duration-500 bg-accent hover:bg-opacity-95">Отправить</button>
 
-							<label class="form-group block text-xs md:text-sm mt-5 w-full">
-								<input type="checkbox" checked required>
-								Согласен на <a href="#" class="underline transition-all duration-700 hover:no-underline">обработку
-									персональных данных</a>
-							</label>
+							<div class="form-group block text-xs md:text-sm mt-5 w-full">
+								<label class="fake-checkbox flex">
+									<input type="checkbox" class="absolute w-0 h-0 opacity-0" required>
+									<span class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
+									<span>
+										Согласен на <a href="#" class="underline transition-all duration-700 hover:no-underline">обработку персональных данных</a>
+									</span>
+									<style>
+										.fake-checkbox input:checked ~ span::after{opacity: 1;}
+									</style>
+								</label>
+							</div>
 
 						</div>
 
