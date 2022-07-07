@@ -10,9 +10,19 @@
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="text-gray-800 font-light overflow-x-hidden" x-data="data"
-	@keydown.escape="$store.state.isModalOpen = false; $store.state.isTypeModalOpen = false"
-	:class="{'overflow-hidden md:pr-[17px]': $store.state.isModalOpen || $store.state.isTypeModalOpen || $store.state.isResponseModalOpen}">
+<body 
+	class="text-gray-800 font-light overflow-x-hidden" 
+	x-data="data"
+	@keydown.escape="
+		$store.state.isModalOpen = false; 
+		$store.state.isTypeModalOpen = false
+	"
+	:class="{
+		'overflow-hidden md:pr-[17px]': 
+		$store.state.isModalOpen 
+		|| $store.state.isTypeModalOpen 
+		|| $store.state.isResponseModalOpen
+	}">
 
 	<header class="sticky top-0 z-50 md:relative header w-full bg-gray-100 flex-shrink-0" id="header">
 		<div class="container border-b py-3 md:py-5">
@@ -52,8 +62,14 @@
 					</div>
 					<button
 						class="hidden md:block text-base text-white font-semibold px-8 border border-transparent rounded-0 outline-none duration-500 bg-accent hover:bg-opacity-95 ml-5"
-						@click="$refs.modalTitle.innerText='Обратная связь'; $refs.form.value = 'Обратная связь'; $store.state.isModalOpen = true;">Заказать
-						звонок</button>
+						@click="
+							$refs.modalTitle.innerText='Обратная связь'; 
+							$refs.formInput.value = 'Обратная связь'; 
+							$refs.typeInput.value = ''; 
+							$store.state.isModalOpen = true;"
+						>
+						Заказать звонок
+					</button>
 				</div>
 				<div class="md:hidden w-32 flex justify-end">
 					<div id="nav-icon2">
@@ -112,8 +128,14 @@
 			</template>
 			<button
 				class="text-xs text-white font-semibold px-8 py-3 mt-8 border border-transparent rounded-0 outline-none duration-500 bg-accent hover:bg-opacity-95"
-				@click="$refs.modalTitle.innerText='Обратная связь'; $refs.form.value = 'Обратная связь'; $store.state.isModalOpen = true;">Заказать
-				звонок</button>
+				@click="
+							$refs.modalTitle.innerText='Обратная связь'; 
+							$refs.formInput.value = 'Обратная связь'; 
+							$refs.typeInput.value = ''; 
+							$store.state.isModalOpen = true;"
+				>
+				Заказать звонок
+			</button>
 		</div>
 	</div>
 
@@ -259,32 +281,23 @@
 							data-aos="fade-up" data-aos-delay="150">
 							<div>
 								<a href="#" @click.prevent="typeModalShow(l.id)">
-									<img 
-										:src="`img/types/thumbs/${l.id}.png`" 
-										class="mb-3 sm:mb-5" 
-										:alt="l.title"
-									>
-									<h3 
-										class="text-md sm:text-2xl font-semibold mb-1 sm:mb-3"
-										x-text="l.title ? l.title : 'Лестницa №'+l.id"
-									></h3>
+									<img :src="`img/types/thumbs/${l.id}.png`" class="mb-3 sm:mb-5" :alt="l.title">
+									<h3 class="text-md sm:text-2xl font-semibold mb-1 sm:mb-3"
+										x-text="l.title ? l.title : 'Лестницa №'+l.id"></h3>
 								</a>
 								<p class="text-xs sm:text-base mb-3 sm:mb-7 font-normal" x-text="kitcut(l.descr, 60)"></p>
 							</div>
 							<div class="flex flex-wrap gap-2">
-								<a 
-									href="#"
+								<a href="#"
 									class="text-xs sm:text-base text-white text-center font-normal px-2 sm:px-8 py-1 sm:py-2 border border-transparent rounded-0 outline-none duration-500 bg-accent hover:bg-opacity-95 grow"
-									@click.prevent="typeModalShow(l.id)"
-								>Подробнее</a>
+									@click.prevent="typeModalShow(l.id)">Подробнее</a>
 								<a href="#"
 									class="text-xs sm:text-base text-center font-normal px-2 sm:px-8 py-1 sm:py-2 border border-transparent rounded-0 outline-none duration-500 border-accent text-accent hover:bg-accent hover:text-white grow"
 									@click.prevent="
 										$refs.modalTitle.innerText='Заказ лестницы'; 
-										$refs.type.value = l.title ? l.title : 'Лестницa №'+l.id; 
-										$refs.form.value = 'Заказ лестницы'; 
-										$store.state.isModalOpen = true;"
-									>Заказать</a>
+										$refs.typeInput.value = l.title ? l.title : 'Лестницa №'+l.id; 
+										$refs.formInput.value = 'Заказ лестницы'; 
+										$store.state.isModalOpen = true;">Заказать</a>
 							</div>
 						</div>
 					</template>
@@ -400,35 +413,44 @@
 	</footer>
 
 	<!-- overlay -->
-	<div class="overflow-y-auto" style="background-color: rgba(0,0,0,0.8)" x-show="$store.state.isModalOpen"
-		:class="{ 'fixed inset-0 z-50 flex items-center justify-center': $store.state.isModalOpen }">
+	<div 
+		class="overflow-y-auto" 
+		style="background-color: rgba(0,0,0,0.8)" 
+		x-show="$store.state.isModalOpen"
+		:class="{ 'fixed inset-0 z-50 flex items-center justify-center': $store.state.isModalOpen }"
+		x-cloak
+	>
 		<!-- dialog -->
-		<div class="max-w-[450px] w-full bg-white shadow-2xl m-4 my-12 sm:m-8 px-5 p-4 sm:py-8 relative z-50"
-			x-show="$store.state.isModalOpen" @click.away="$store.state.isModalOpen = false">
-			<button class="absolute top-1 right-1 text-3xl p-1 px-3"
-				@click="$store.state.isModalOpen = false;">&times;</button>
+		<div 
+			class="max-w-[450px] w-full bg-white shadow-2xl m-4 my-12 sm:m-8 px-5 p-4 sm:py-8 relative z-50"
+			x-show="$store.state.isModalOpen" 
+			@click.away="$store.state.isModalOpen = false"
+		>
+			<button 
+				class="absolute top-1 right-1 text-3xl p-1 px-3"
+				@click="$store.state.isModalOpen = false;"
+			>&times;</button>
+
 			<h3 class="text-center mb-5 text-2xl font-semibold" x-ref="modalTitle"></h3>
 
 			<form>
 				<input type="email" tabindex="-1" name="Email" placeholder="mail@example.com" class="h-0 opacity-0 absolute">
+				<input type="hidden" name="form" x-ref="formInput">
+				<input type="hidden" name="type" x-ref="typeInput">
 				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
 					Имя
 					<input type="text" name="name"
 						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
 						placeholder="Ваше имя">
 				</label>
-				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
+				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-8">
 					Телефон *
 					<input type="text" name="phone"
 						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
 						placeholder="+7 (999) 123-45-67" required>
 				</label>
-				<input type="hidden" name="form" x-ref="form">
-				<input type="hidden" name="type" x-ref="type">
 
-				<button type="submit"
-					class="w-full bg-accent text-white text-base px-2 py-3 border border-cyan mb-5">Отправить</button>
-				<div class="form-group block text-xs md:text-sm w-full">
+				<div class="form-group block text-xs md:text-sm w-full mb-5">
 					<label class="fake-checkbox flex">
 						<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree" required>
 						<span
@@ -438,80 +460,75 @@
 								target="_blank">обработку
 								персональных данных</a>
 						</span>
-						<style>
-							.fake-checkbox input:checked~span::after {
-								opacity: 1;
-							}
-						</style>
 					</label>
 				</div>
+				<button type="submit" class="w-full bg-accent text-white text-base px-2 py-3 mb-5">Отправить</button>
 			</form>
 
 		</div><!-- /dialog -->
 	</div><!-- /overlay -->
 
-		<!-- overlay -->
-		<div class="overflow-y-auto" style="background-color: rgba(0,0,0,0.8)" x-show="$store.state.isTypeModalOpen"
-		:class="{ 'fixed inset-0 z-50 flex items-center justify-center': $store.state.isTypeModalOpen }">
+	<!-- overlay -->
+	<div 
+		class="overflow-y-auto" 
+		style="background-color: rgba(0,0,0,0.8)" 
+		x-show="$store.state.isTypeModalOpen"
+		x-cloak
+		:class="{ 'fixed inset-0 z-50 flex items-start justify-center': $store.state.isTypeModalOpen }"
+		>
 		<!-- dialog -->
-		<div 
-			class="w-full lg:w-[90vw] max-w-[1300px] min-h-[700px] h-screen lg:h-[90vh] md:max-h-[900px] bg-white shadow-2xl p-5 md:py-8 relative z-50"
-			x-show="$store.state.isTypeModalOpen" @click.away="$store.state.isTypeModalOpen = false">
-			<button class="absolute top-1 right-1 text-3xl p-1 px-3 z-50"
-				@click="$store.state.isTypeModalOpen = false;">&times;</button>
-			
+		<div
+			class="w-full lg:w-[90vw] max-w-[1300px] min-h-screen lg:min-h-[700px] lg:mt-[3vh] lg:mb-[3vh] bg-white shadow-2xl p-5 lg:py-8 relative z-50"
+			x-show="$store.state.isTypeModalOpen" 
+			@click.away="$store.state.isTypeModalOpen = false"
+		>
+			<button 
+				class="absolute top-1 right-1 text-3xl p-1 px-3 z-50"
+				@click="$store.state.isTypeModalOpen = false;"
+			>&times;</button>
+
 			<div class="grid grid-cols-1 lg:grid-cols-2 h-full">
-				<div class="h-full relative">
-					<img src="" x-ref="typeImg" class="max-h-full w-auto absolute left-1/2 -translate-x-1/2" alt="">
-				</div>
-				<div class="md:pl-5 mt-8 lg:mt-0">
+				<a href="" data-fslightbox="types-lightbox" class="relative lg:px-8" x-ref="typeImgLink">
+					<img src="" x-ref="typeImg" class="h-[380px] lg:h-full max-h-full w-auto mx-auto object-cover" alt="">
+				</a>
+				<div class="lg:pl-5 mt-8 lg:mt-0">
 					<h2 class="font-semibold text-2xl lg:text-3xl" x-ref="typeTitle"></h2>
 					<p class="mt-4 text-lg" x-ref="typeDescr"></p>
-					<h2 class="font-semibold text-lg mt-8">Хотите узнать подробности или заказать?</h2>
-					<p class="mt-2">Оставьте свои данные и мы свяжемся с Вами в ближайшее время</p>
-					<form>
-
+					<h2 class="font-semibold text-xl mt-8">Хотите узнать подробности или заказать?</h2>
+					<p class="mt-2 mb-5">Оставьте свои данные и мы свяжемся с Вами в ближайшее время</p>
+					<form x-ref="typeForm">
+						<input type="text" name="email" tabindex="-1" class="h-0 opacity-0 absolute">
+						<input type="hidden" name="form" value="Заказ лестницы из модального окна">
+						<input type="hidden" name="type" x-ref="typeInputTitle">
+						<label class="form-group text-base font-bold mb-5 block">
+							Имя
+							<input type="text" name="name"
+								class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
+								placeholder="Ваше имя">
+						</label>
+						<label class="form-group text-base font-bold mb-8 block">
+							Телефон *
+							<input type="text" name="phone"
+								class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
+								placeholder="+7 (999) 123-45-67" required>
+						</label>
+						<div class="form-group block text-xs md:text-sm w-full mb-5">
+							<label class="fake-checkbox flex">
+								<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree" required>
+								<span
+									class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
+								<span class="block">
+									Согласен на <a href="/privacy-policy/"
+										class="underline transition-all duration-700 hover:no-underline" target="_blank">обработку
+										персональных данных</a>
+								</span>
+							</label>
+						</div>
+						<button type="submit"
+							class="w-full bg-accent text-white text-base px-2 py-3 mb-5">Отправить</button>
 					</form>
 				</div>
 			</div>
-
-			<form class="hidden">
-				<input type="email" tabindex="-1" name="Email" placeholder="mail@example.com" class="h-0 opacity-0 absolute">
-				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
-					Имя
-					<input type="text" name="name"
-						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-						placeholder="Ваше имя">
-				</label>
-				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
-					Телефон *
-					<input type="text" name="phone"
-						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-						placeholder="+7 (999) 123-45-67" required>
-				</label>
-				<input type="hidden" name="form" x-ref="form">
-				<input type="hidden" name="type" x-ref="type">
-
-				<button type="submit"
-					class="w-full bg-accent text-white text-base px-2 py-3 border border-cyan mb-5">Отправить</button>
-				<div class="form-group block text-xs md:text-sm w-full">
-					<label class="fake-checkbox flex">
-						<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree" required>
-						<span
-							class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
-						<span class="block">
-							Согласен на <a href="/privacy-policy/" class="underline transition-all duration-700 hover:no-underline"
-								target="_blank">обработку
-								персональных данных</a>
-						</span>
-						<style>
-							.fake-checkbox input:checked~span::after {
-								opacity: 1;
-							}
-						</style>
-					</label>
-				</div>
-			</form>
 
 		</div><!-- /dialog -->
 	</div><!-- /overlay -->
