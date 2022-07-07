@@ -29,6 +29,7 @@ const scroll = () => {
 				const parent = anchor.closest('.top-line');
 				if(parent){
 					toggleClasses()
+					document.body.classList.remove('no-scroll')
 				}
 				// anchors.forEach(item => {
 				// 	item.classList.remove('bg-accent', 'text-white');
