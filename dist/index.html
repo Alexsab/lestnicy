@@ -11,8 +11,8 @@
 </head>
 
 <body class="text-gray-800 font-light overflow-x-hidden" x-data="data"
-	@keydown.escape="$store.state.isModalOpen = false"
-	:class="{'overflow-hidden md:pr-[17px]': $store.state.isModalOpen || $store.state.isResponseModalOpen}">
+	@keydown.escape="$store.state.isModalOpen = false; $store.state.isTypeModalOpen = false"
+	:class="{'overflow-hidden md:pr-[17px]': $store.state.isModalOpen || $store.state.isTypeModalOpen || $store.state.isResponseModalOpen}">
 
 	<header class="sticky top-0 z-50 md:relative header w-full bg-gray-100 flex-shrink-0" id="header">
 		<div class="container border-b py-3 md:py-5">
@@ -258,7 +258,7 @@
 						<div class="flex flex-col justify-between transition-all p-2 sm:p-5 shadow-xl hover:shadow-md opacity-0"
 							data-aos="fade-up" data-aos-delay="150">
 							<div>
-								<a href="#">
+								<a href="#" @click.prevent="typeModalShow(l.id)">
 									<img 
 										:src="`img/types/thumbs/${l.id}.png`" 
 										class="mb-3 sm:mb-5" 
@@ -269,13 +269,14 @@
 										x-text="l.title ? l.title : 'Лестницa №'+l.id"
 									></h3>
 								</a>
-								<p class="text-xs sm:text-base mb-3 sm:mb-7 font-normal">Далеко-далеко за словесными горами в стране
-									гласных
-									и согласных живут, рыбные тексты...</p>
+								<p class="text-xs sm:text-base mb-3 sm:mb-7 font-normal" x-text="kitcut(l.descr, 60)"></p>
 							</div>
 							<div class="flex flex-wrap gap-2">
-								<a href="#"
-									class="text-xs sm:text-base text-white text-center font-normal px-2 sm:px-8 py-1 sm:py-2 border border-transparent rounded-0 outline-none duration-500 bg-accent hover:bg-opacity-95 grow">Подробнее</a>
+								<a 
+									href="#"
+									class="text-xs sm:text-base text-white text-center font-normal px-2 sm:px-8 py-1 sm:py-2 border border-transparent rounded-0 outline-none duration-500 bg-accent hover:bg-opacity-95 grow"
+									@click.prevent="typeModalShow(l.id)"
+								>Подробнее</a>
 								<a href="#"
 									class="text-xs sm:text-base text-center font-normal px-2 sm:px-8 py-1 sm:py-2 border border-transparent rounded-0 outline-none duration-500 border-accent text-accent hover:bg-accent hover:text-white grow"
 									@click.prevent="
@@ -400,7 +401,7 @@
 
 	<!-- overlay -->
 	<div class="overflow-y-auto" style="background-color: rgba(0,0,0,0.8)" x-show="$store.state.isModalOpen"
-		:class="{ 'fixed inset-0 z-50 flex items-start justify-center': $store.state.isModalOpen }">
+		:class="{ 'fixed inset-0 z-50 flex items-center justify-center': $store.state.isModalOpen }">
 		<!-- dialog -->
 		<div class="max-w-[450px] w-full bg-white shadow-2xl m-4 my-12 sm:m-8 px-5 p-4 sm:py-8 relative z-50"
 			x-show="$store.state.isModalOpen" @click.away="$store.state.isModalOpen = false">
@@ -409,6 +410,72 @@
 			<h3 class="text-center mb-5 text-2xl font-semibold" x-ref="modalTitle"></h3>
 
 			<form>
+				<input type="email" tabindex="-1" name="Email" placeholder="mail@example.com" class="h-0 opacity-0 absolute">
+				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
+					Имя
+					<input type="text" name="name"
+						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
+						placeholder="Ваше имя">
+				</label>
+				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
+					Телефон *
+					<input type="text" name="phone"
+						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
+						placeholder="+7 (999) 123-45-67" required>
+				</label>
+				<input type="hidden" name="form" x-ref="form">
+				<input type="hidden" name="type" x-ref="type">
+
+				<button type="submit"
+					class="w-full bg-accent text-white text-base px-2 py-3 border border-cyan mb-5">Отправить</button>
+				<div class="form-group block text-xs md:text-sm w-full">
+					<label class="fake-checkbox flex">
+						<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree" required>
+						<span
+							class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
+						<span class="block">
+							Согласен на <a href="/privacy-policy/" class="underline transition-all duration-700 hover:no-underline"
+								target="_blank">обработку
+								персональных данных</a>
+						</span>
+						<style>
+							.fake-checkbox input:checked~span::after {
+								opacity: 1;
+							}
+						</style>
+					</label>
+				</div>
+			</form>
+
+		</div><!-- /dialog -->
+	</div><!-- /overlay -->
+
+		<!-- overlay -->
+		<div class="overflow-y-auto" style="background-color: rgba(0,0,0,0.8)" x-show="$store.state.isTypeModalOpen"
+		:class="{ 'fixed inset-0 z-50 flex items-center justify-center': $store.state.isTypeModalOpen }">
+		<!-- dialog -->
+		<div 
+			class="w-full lg:w-[90vw] max-w-[1300px] min-h-[700px] h-screen lg:h-[90vh] md:max-h-[900px] bg-white shadow-2xl p-5 md:py-8 relative z-50"
+			x-show="$store.state.isTypeModalOpen" @click.away="$store.state.isTypeModalOpen = false">
+			<button class="absolute top-1 right-1 text-3xl p-1 px-3 z-50"
+				@click="$store.state.isTypeModalOpen = false;">&times;</button>
+			
+			<div class="grid grid-cols-1 lg:grid-cols-2 h-full">
+				<div class="h-full relative">
+					<img src="" x-ref="typeImg" class="max-h-full w-auto absolute left-1/2 -translate-x-1/2" alt="">
+				</div>
+				<div class="md:pl-5 mt-8 lg:mt-0">
+					<h2 class="font-semibold text-2xl lg:text-3xl" x-ref="typeTitle"></h2>
+					<p class="mt-4 text-lg" x-ref="typeDescr"></p>
+					<h2 class="font-semibold text-lg mt-8">Хотите узнать подробности или заказать?</h2>
+					<p class="mt-2">Оставьте свои данные и мы свяжемся с Вами в ближайшее время</p>
+					<form>
+
+					</form>
+				</div>
+			</div>
+
+			<form class="hidden">
 				<input type="email" tabindex="-1" name="Email" placeholder="mail@example.com" class="h-0 opacity-0 absolute">
 				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
 					Имя
