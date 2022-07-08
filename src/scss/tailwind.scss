@@ -67,4 +67,8 @@ strong{
 
 [x-cloak] { display: none !important; }
 
+.fake-checkbox input:checked~span::after {
+	opacity: 1;
+}
+
 // 	

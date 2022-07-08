@@ -1,4 +1,5 @@
 import lestnicy from './lestnicy'
+// import galary from './galary'
 
 document.addEventListener('alpine:init', () => {
 	Alpine.data('data', () => ({
@@ -9,6 +10,16 @@ document.addEventListener('alpine:init', () => {
 		email: 'sammetok@yandex.ru',
 		address: 'Самара, ул. Революционная, 101 А',
 		lestnicy: lestnicy,
+		galary: [
+			{url: 'img/about/1.png', thumb: 'img/about/1.png'},
+			{url: 'img/about/2.jpg', thumb: 'img/about/2.jpg'},
+			{url: 'img/about/3.jpg', thumb: 'img/about/3.jpg'},
+			{url: 'img/about/1.png', thumb: 'img/about/1.png'},
+			{url: 'img/about/2.jpg', thumb: 'img/about/2.jpg'},
+			{url: 'img/about/3.jpg', thumb: 'img/about/3.jpg'},
+			{url: 'img/about/1.png', thumb: 'img/about/1.png'},
+			{url: 'img/about/2.jpg', thumb: 'img/about/2.jpg'},
+		],
 		typeModalShow(id) {
 			const type = lestnicy.find((t) => t.id === id)
 			const title = type.title ? type.title : 'Лестница № ' + type.id
@@ -17,7 +28,7 @@ document.addEventListener('alpine:init', () => {
 			this.$refs.typeImg.alt = title
 			this.$refs.typeTitle.innerText = title
 			this.$refs.typeDescr.innerText = type.descr
-			this.$refs.typeInputTitle.innerText = title
+			this.$refs.typeInputTitle.value = title
 			this.$refs.typeForm.reset()
 			this.$refs.typeImg.onload = () => {
 				Alpine.store('state').isTypeModalOpen = true

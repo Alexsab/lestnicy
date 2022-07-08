@@ -85,7 +85,7 @@
 		</div>
 	</header>
 
-	<div class="top-line hidden pb-5 md:pb-0 overflow-y-auto md:block fixed md:sticky md:top-0 z-50 bg-gray-100 w-full">
+	<div class="top-line hidden pb-5 md:pb-0 overflow-y-auto md:block fixed md:sticky md:top-0 z-10 bg-gray-100 w-full">
 		<nav>
 			<ul class="flex flex-col md:flex-row items-center justify-center text-lg font-normal">
 				<li class="w-full md:w-auto"><a href="#about"
@@ -207,19 +207,22 @@
 									class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
 									placeholder="Ваше имя">
 							</label>
-							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-3">
+							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-3" id="phone">
 								Телефон *
 								<input type="text" name="phone"
 									class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-									placeholder="+7 (999) 123-45-67" required>
+									placeholder="+7 (999) 123-45-67">
+									<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
 							</label>
+
+							<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
 
 							<button type="submit"
 								class="text-base w-full md:w-[32%] lg:w-full text-white font-bold px-5 py-3 lg:py-4 border border-transparent block rounded-0 outline-none lg:mt-7 duration-500 bg-accent hover:bg-opacity-95">Отправить</button>
 
-							<div class="form-group block text-xs md:text-sm mt-5 w-full">
+							<div class="form-group block text-xs md:text-sm mt-5 w-full" id="agree">
 								<label class="fake-checkbox flex">
-									<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree" required>
+									<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
 									<span
 										class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
 									<span class="block -mt-0.5">
@@ -227,12 +230,8 @@
 											class="underline transition-all duration-700 hover:no-underline">обработку
 											персональных данных</a>
 									</span>
-									<style>
-										.fake-checkbox input:checked~span::after {
-											opacity: 1;
-										}
-									</style>
 								</label>
+								<small class="text-left text-xs text-red-600 mt-1 hidden">Чтобы продолжить установите флажок</small>
 							</div>
 
 						</div>
@@ -312,30 +311,11 @@
 				<div class="descr-section lg:w-1/2 mx-auto mb-6 sm:mb-10 opacity-0" data-aos="fade-up" data-aos-delay="50">
 					Примеры выполненных работ, которыми гордится наша команда</div>
 				<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-					<a href="img/about/1.png" data-aos="fade-up" data-aos-delay="50" data-fslightbox>
-						<img src="img/about/1.png" class="galary-item object-cover object-center" alt="ALT">
-					</a>
-					<a href="img/about/2.jpg" data-aos="fade-up" data-aos-delay="150" data-fslightbox>
-						<img src="img/about/2.jpg" class="galary-item object-cover object-center" alt="ALT">
-					</a>
-					<a href="img/about/3.jpg" data-aos="fade-up" data-aos-delay="250" data-fslightbox>
-						<img src="img/about/3.jpg" class="galary-item object-cover object-center" alt="ALT">
-					</a>
-					<a href="img/about/1.png" data-aos="fade-up" data-aos-delay="350" data-fslightbox>
-						<img src="img/about/1.png" class="galary-item object-cover object-center" alt="ALT">
-					</a>
-					<a href="img/about/2.jpg" data-aos="fade-up" data-aos-delay="50" data-fslightbox>
-						<img src="img/about/2.jpg" class="galary-item object-cover object-center" alt="ALT">
-					</a>
-					<a href="img/about/3.jpg" data-aos="fade-up" data-aos-delay="150" data-fslightbox>
-						<img src="img/about/3.jpg" class="galary-item object-cover object-center" alt="ALT">
-					</a>
-					<a href="img/about/1.png" data-aos="fade-up" data-aos-delay="250" data-fslightbox>
-						<img src="img/about/1.png" class="galary-item object-cover object-center" alt="ALT">
-					</a>
-					<a href="img/about/2.jpg" data-aos="fade-up" data-aos-delay="350" data-fslightbox>
-						<img src="img/about/2.jpg" class="galary-item object-cover object-center" alt="ALT">
-					</a>
+					<template x-for="(g, i) in galary" :key="i">
+						<a :href="g.url" data-aos="fade-up" data-aos-delay="50" data-fslightbox="galary">
+							<img :src="g.thumb" class="galary-item object-cover object-center" />
+						</a>
+					</template>
 				</div>
 			</div>
 		</section>
@@ -443,16 +423,17 @@
 						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
 						placeholder="Ваше имя">
 				</label>
-				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-8">
+				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-8" id="phone">
 					Телефон *
 					<input type="text" name="phone"
 						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-						placeholder="+7 (999) 123-45-67" required>
+						placeholder="+7 (999) 123-45-67">
+						<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
 				</label>
 
-				<div class="form-group block text-xs md:text-sm w-full mb-5">
+				<div class="form-group block text-xs md:text-sm w-full mb-5" id="agree">
 					<label class="fake-checkbox flex">
-						<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree" required>
+						<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
 						<span
 							class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
 						<span class="block">
@@ -461,6 +442,7 @@
 								персональных данных</a>
 						</span>
 					</label>
+					<small class="text-left text-xs text-red-600 mt-1 hidden">Чтобы продолжить установите флажок</small>
 				</div>
 				<button type="submit" class="w-full bg-accent text-white text-base px-2 py-3 mb-5">Отправить</button>
 			</form>
@@ -474,7 +456,7 @@
 		style="background-color: rgba(0,0,0,0.8)" 
 		x-show="$store.state.isTypeModalOpen"
 		x-cloak
-		:class="{ 'fixed inset-0 z-50 flex items-start justify-center': $store.state.isTypeModalOpen }"
+		:class="{ 'fixed inset-0 z-20 flex items-start justify-center': $store.state.isTypeModalOpen }"
 		>
 		<!-- dialog -->
 		<div
@@ -506,15 +488,16 @@
 								class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
 								placeholder="Ваше имя">
 						</label>
-						<label class="form-group text-base font-bold mb-8 block">
+						<label class="form-group text-base font-bold mb-8 block" id="phone">
 							Телефон *
 							<input type="text" name="phone"
 								class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-								placeholder="+7 (999) 123-45-67" required>
+								placeholder="+7 (999) 123-45-67">
+								<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
 						</label>
-						<div class="form-group block text-xs md:text-sm w-full mb-5">
+						<div class="form-group block text-xs md:text-sm w-full mb-5" id="agree">
 							<label class="fake-checkbox flex">
-								<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree" required>
+								<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
 								<span
 									class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
 								<span class="block">
@@ -523,12 +506,38 @@
 										персональных данных</a>
 								</span>
 							</label>
+							<small class="text-left text-xs text-red-600 mt-1 hidden">Чтобы продолжить установите флажок</small>
 						</div>
 						<button type="submit"
 							class="w-full bg-accent text-white text-base px-2 py-3 mb-5">Отправить</button>
 					</form>
 				</div>
 			</div>
+
+		</div><!-- /dialog -->
+	</div><!-- /overlay -->
+
+	<!-- overlay -->
+	<div
+		class="overflow-y-auto"
+		id="response_modal"
+		style="background-color: rgba(0,0,0,0.8)"
+		x-show="$store.state.isResponseModalOpen"
+		:class="{ 'fixed inset-0 z-50 flex items-start justify-center': $store.state.isResponseModalOpen }"
+	>
+	<!-- dialog -->
+		<div
+			class="max-w-[450px] w-full bg-white shadow-2xl m-4 my-12 sm:m-8 px-5 p-4 sm:py-8 relative z-50"
+			x-show="$store.state.isResponseModalOpen"
+			@click.away="$store.state.isResponseModalOpen = false"
+		>
+			<button class="absolute top-1 right-1 text-3xl p-1 px-3" @click="$store.state.isResponseModalOpen = false;">&times;</button>
+			<h3 class="text-2xl text-center mb-5"></h3>
+
+			<div class="content text-center">
+				<p></p>
+			</div>
+
 
 		</div><!-- /dialog -->
 	</div><!-- /overlay -->
