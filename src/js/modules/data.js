@@ -1,5 +1,5 @@
 import lestnicy from './lestnicy'
-// import galary from './galary'
+import galary from './galary'
 
 document.addEventListener('alpine:init', () => {
 	Alpine.data('data', () => ({
@@ -10,16 +10,7 @@ document.addEventListener('alpine:init', () => {
 		email: 'sammetok@yandex.ru',
 		address: 'Самара, ул. Революционная, 101 А',
 		lestnicy: lestnicy,
-		galary: [
-			{url: 'img/about/1.png', thumb: 'img/about/1.png'},
-			{url: 'img/about/2.jpg', thumb: 'img/about/2.jpg'},
-			{url: 'img/about/3.jpg', thumb: 'img/about/3.jpg'},
-			{url: 'img/about/1.png', thumb: 'img/about/1.png'},
-			{url: 'img/about/2.jpg', thumb: 'img/about/2.jpg'},
-			{url: 'img/about/3.jpg', thumb: 'img/about/3.jpg'},
-			{url: 'img/about/1.png', thumb: 'img/about/1.png'},
-			{url: 'img/about/2.jpg', thumb: 'img/about/2.jpg'},
-		],
+		galary: galary,
 		typeModalShow(id) {
 			const type = lestnicy.find((t) => t.id === id)
 			const title = type.title ? type.title : 'Лестница № ' + type.id

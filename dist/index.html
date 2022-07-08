@@ -193,7 +193,7 @@
 
 					<div class="w-full">
 						<h2 class="text-xl md:text-2xl font-bold mb-2">Заголовок формы</h2>
-						<p class=" text-base md:text-lg">Подзаголовок формы, если нужен в 2 строки</p>
+						<p class=" text-base">Подзаголовок формы, если нужен в 2 строки или более</p>
 					</div>
 
 					<form class="w-full mt-5 flex flex-wrap justify-between lg:justify-start lg:flex-col">
@@ -201,26 +201,23 @@
 						<input type="hidden" name="form" value="Баннер">
 						<div class="w-full flex flex-wrap items-end justify-between lg:block">
 
-							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-3">
+							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-5">
 								Имя
 								<input type="text" name="name"
 									class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
 									placeholder="Ваше имя">
 							</label>
-							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-3" id="phone">
+							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-5" id="phone">
 								Телефон *
 								<input type="text" name="phone"
 									class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-									placeholder="+7 (999) 123-45-67">
+									placeholder="+7 (999) 123-45-67" required>
 									<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
 							</label>
 
 							<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
 
-							<button type="submit"
-								class="text-base w-full md:w-[32%] lg:w-full text-white font-bold px-5 py-3 lg:py-4 border border-transparent block rounded-0 outline-none lg:mt-7 duration-500 bg-accent hover:bg-opacity-95">Отправить</button>
-
-							<div class="form-group block text-xs md:text-sm mt-5 w-full" id="agree">
+							<div class="form-group block text-xs md:text-sm mb-8 w-full" id="agree">
 								<label class="fake-checkbox flex">
 									<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
 									<span
@@ -233,6 +230,9 @@
 								</label>
 								<small class="text-left text-xs text-red-600 mt-1 hidden">Чтобы продолжить установите флажок</small>
 							</div>
+
+							<button type="submit"
+								class="text-base w-full md:w-[32%] lg:w-full text-white font-bold px-5 py-3 lg:py-4 border border-transparent block rounded-0 outline-none lg:mt-7 duration-500 bg-accent hover:bg-opacity-95">Отправить</button>
 
 						</div>
 
@@ -394,8 +394,7 @@
 
 	<!-- overlay -->
 	<div 
-		class="overflow-y-auto" 
-		style="background-color: rgba(0,0,0,0.8)" 
+		class="overflow-y-auto bg-black bg-opacity-80" 
 		x-show="$store.state.isModalOpen"
 		:class="{ 'fixed inset-0 z-50 flex items-center justify-center': $store.state.isModalOpen }"
 		x-cloak
@@ -427,9 +426,11 @@
 					Телефон *
 					<input type="text" name="phone"
 						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-						placeholder="+7 (999) 123-45-67">
+						placeholder="+7 (999) 123-45-67" required>
 						<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
 				</label>
+
+				<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
 
 				<div class="form-group block text-xs md:text-sm w-full mb-5" id="agree">
 					<label class="fake-checkbox flex">
@@ -452,8 +453,7 @@
 
 	<!-- overlay -->
 	<div 
-		class="overflow-y-auto" 
-		style="background-color: rgba(0,0,0,0.8)" 
+		class="overflow-y-auto bg-black bg-opacity-80" 
 		x-show="$store.state.isTypeModalOpen"
 		x-cloak
 		:class="{ 'fixed inset-0 z-20 flex items-start justify-center': $store.state.isTypeModalOpen }"
@@ -492,9 +492,12 @@
 							Телефон *
 							<input type="text" name="phone"
 								class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
-								placeholder="+7 (999) 123-45-67">
+								placeholder="+7 (999) 123-45-67" required>
 								<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
 						</label>
+
+						<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
+						
 						<div class="form-group block text-xs md:text-sm w-full mb-5" id="agree">
 							<label class="fake-checkbox flex">
 								<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
@@ -519,9 +522,8 @@
 
 	<!-- overlay -->
 	<div
-		class="overflow-y-auto"
+		class="overflow-y-auto bg-black bg-opacity-80"
 		id="response_modal"
-		style="background-color: rgba(0,0,0,0.8)"
 		x-show="$store.state.isResponseModalOpen"
 		:class="{ 'fixed inset-0 z-50 flex items-start justify-center': $store.state.isResponseModalOpen }"
 	>

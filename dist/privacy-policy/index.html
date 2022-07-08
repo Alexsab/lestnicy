@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Лестницы в Самаре</title>
+	<link rel="icon" href="../img/favicon.png">
+	<link rel="stylesheet" href="../css/styles.css">
+	<style>
+		h1 {
+			font-weight: 600;
+			margin-bottom: 1.5rem;
+		}
+
+		h2 {
+			font-size: 1.4rem !important;
+			text-align: left !important;
+			margin-bottom: 1.25rem;
+		}
+
+		h3 {
+			font-size: 1.3rem;
+		}
+
+		p {
+			line-height: 160%;
+			margin-bottom: 0.8rem;
+			font-weight: 400;
+		}
+	</style>
+</head>
+
+<body class="text-gray-800 font-light overflow-x-hidden" x-data="data" @keydown.escape="
+		$store.state.isModalOpen = false; 
+	" :class="{
+		'overflow-hidden md:pr-[17px]': 
+		$store.state.isModalOpen 
+		|| $store.state.isResponseModalOpen
+	}">
+
+	<header class="sticky top-0 z-50 md:relative header w-full bg-gray-100 flex-shrink-0" id="header">
+		<div class="container border-b py-3 md:py-5">
+			<div class="flex items-center justify-between h-full">
+				<a href="#" class="w-32">
+					<img src="../img/no-logo.png" alt="" class="w-full">
+				</a>
+				<div class="hidden sm:flex gap-5 font-normal flex-grow md:flex-grow-0 justify-center md:justify-end">
+					<div class="hidden lg:flex flex-col gap-1">
+						<div class="flex items-center gap-2 sm:text-lg">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24"
+								stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							<span>Звоните 9:00–21:00</span>
+						</div>
+						<a :href="'mailto:'+email" class="flex items-center gap-2 sm:text-lg">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24"
+								stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round"
+									d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+							</svg>
+							<span x-text="email"></span>
+						</a>
+					</div>
+					<div class="flex flex-col gap-1" x-data>
+						<template x-for="phone in phones" :key="phone.id">
+							<a :href="'tel:'+phone.phone.replace(/[^0-9]/g,'')" class="flex items-center gap-2 sm:text-lg">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round"
+										d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+								</svg>
+								<span x-text="phone.phone"></span>
+							</a>
+						</template>
+					</div>
+					<button
+						class="hidden md:block text-base text-white font-semibold px-8 border border-transparent rounded-0 outline-none duration-500 bg-accent hover:bg-opacity-95 ml-5"
+						@click="
+							$refs.modalTitle.innerText='Обратная связь'; 
+							$refs.formInput.value = 'Обратная связь'; 
+							$refs.typeInput.value = ''; 
+							$store.state.isModalOpen = true;">
+						Заказать звонок
+					</button>
+				</div>
+				<div class="md:hidden w-32 flex justify-end">
+					<div id="nav-icon2">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="top-line hidden pb-5 md:pb-0 overflow-y-auto md:block fixed md:sticky md:top-0 z-10 bg-gray-100 w-full">
+		<nav>
+			<ul class="flex flex-col md:flex-row items-center justify-center text-lg font-normal">
+				<li class="w-full md:w-auto"><a href="/#about"
+						class="text-center py-4 px-5 block transition-all hover:bg-accent hover:text-white">О нас</a></li>
+				<li class="w-full md:w-auto"><a href="/#types"
+						class="text-center py-4 px-5 block transition-all hover:bg-accent hover:text-white">Типы лестниц</a>
+				</li>
+				<li class="w-full md:w-auto"><a href="/#works"
+						class="text-center py-4 px-5 block transition-all hover:bg-accent hover:text-white">Работы</a></li>
+				<li class="w-full md:w-auto"><a href="/#contacts"
+						class="text-center py-4 px-5 block transition-all hover:bg-accent hover:text-white">Контакты</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="flex flex-col items-center gap-4 mt-8 md:hidden">
+			<div class="flex items-center gap-2 sm:text-lg">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24"
+					stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+				</svg>
+				<span>Звоните 9:00–21:00</span>
+			</div>
+			<a :href="'mailto:'+email" class="flex items-center gap-2 sm:text-lg">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24"
+					stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round"
+						d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+				</svg>
+				<span x-text="email"></span>
+			</a>
+			<template x-for="phone in phones" :key="phone.id">
+				<a :href="'tel:'+phone.phone.replace(/[^0-9]/g,'')" class="flex items-center gap-2 sm:text-lg sm:hidden">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24"
+						stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round"
+							d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+					</svg>
+					<span x-text="phone.phone"></span>
+				</a>
+			</template>
+			<button
+				class="text-xs text-white font-semibold px-8 py-3 mt-8 border border-transparent rounded-0 outline-none duration-500 bg-accent hover:bg-opacity-95"
+				@click="
+							$refs.modalTitle.innerText='Обратная связь'; 
+							$refs.formInput.value = 'Обратная связь'; 
+							$refs.typeInput.value = ''; 
+							$store.state.isModalOpen = true;">
+				Заказать звонок
+			</button>
+		</div>
+	</div>
+
+	<main>
+		<section class="section">
+			<div class="container">
+				<div class="layout">
+					<h1 class="text-2xl md:text-3xl">Политика конфиденциальности персональных данных</h1>
+					<p>Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в 
+					отношении всей информации, которую сайт <strong>Лестницы в Самаре</strong>, (далее – Сайт по изготовлению лестниц) расположенный на 
+					доменном имени <strong>https://лестницы63.рф</strong> (а также его субдоменах), может получить о Пользователе во время использования 
+					сайта https://лестницы63.рф (а также его субдоменов), его программ и его продуктов.</p>
+					
+					<h2>1. Определение терминов</h2>
+					
+					<p><strong>1.1 В настоящей Политике конфиденциальности используются следующие термины:</strong></p>
+					
+					<p>1.1.1. «<strong>Администрация сайта</strong>» (далее – Администрация) – уполномоченные сотрудники 
+					на управление сайтом <strong>Лестницы в Самаре</strong>,
+					которые организуют и (или) осуществляют обработку персональных данных, а также определяет цели обработки персональных 
+					данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.</p>
+					
+					<p>1.1.2. «Персональные данные» - любая информация, относящаяся к прямо или косвенно определенному, или определяемому 
+					физическому лицу (субъекту персональных данных).</p>
+			
+					<p>1.1.3. «Обработка персональных данных» - любое действие (операция) или совокупность действий (операций), совершаемых 
+					с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, 
+					систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу 
+					(распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.</p>
+			
+					<p>1.1.4. «Конфиденциальность персональных данных» - обязательное для соблюдения Оператором или иным получившим доступ 
+					к персональным данным лицом требование не допускать их распространения без согласия субъекта персональных данных или 
+					наличия иного законного основания.</p>
+			
+					<p>1.1.5. «Сайт <strong> Лестницы в Самаре</strong>» - это совокупность связанных между собой веб-страниц, размещенных в сети Интернет по уникальному 
+					адресу (URL): <strong>https://лестницы63.рф</strong>, а также его субдоменах.</p>
+			
+					<p>1.1.6. «Субдомены»  - это страницы или совокупность страниц, расположенные на доменах третьего уровня, 
+					принадлежащие сайту Лестницы в Самаре, а также другие временные страницы, внизу который указана контактная
+					информация Администрации</p>
+					
+					<p>1.1.5. «Пользователь сайта <strong>Лестницы в Самаре</strong> » (далее Пользователь) – лицо, имеющее доступ 
+					к сайту <strong>Лестницы в Самаре</strong>, посредством сети Интернет 
+					и использующее информацию, материалы и продукты сайта <strong>Лестницы в Самаре</strong>.</p>
+					
+					<p>1.1.7. «Cookies» — небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя, 
+					который веб-клиент или веб-браузер каждый раз пересылает веб-серверу в HTTP-запросе при попытке открыть страницу 
+					соответствующего сайта.</p>
+			
+					<p>1.1.8. «IP-адрес» — уникальный сетевой адрес узла в компьютерной сети, через который Пользователь получает доступ на 
+					Сайт по изготовлению лестниц.</p>
+					
+					<h2>2. Общие положения</h2>
+					<p>2.1. Использование сайта Лестницы в Самаре Пользователем означает согласие с настоящей Политикой 
+					конфиденциальности и условиями обработки персональных данных Пользователя.</p>
+			
+					<p>2.2. В случае несогласия с условиями Политики конфиденциальности Пользователь должен прекратить использование 
+					сайта Лестницы в Самаре .</p>
+			
+					<p>2.3. Настоящая Политика конфиденциальности применяется к сайту Лестницы в Самаре.
+					Сайт по изготовлению лестниц не контролирует и не несет ответственность за сайты третьих лиц, на которые Пользователь 
+					может перейти по ссылкам, доступным на сайте Лестницы в Самаре.</p>
+			
+					<p>2.4. Администрация не проверяет достоверность персональных данных, предоставляемых Пользователем.</p>
+					
+					<h2>3. Предмет политики конфиденциальности</h2>
+					
+					<p>3.1. Настоящая Политика конфиденциальности устанавливает обязательства Администрации по неразглашению и обеспечению 
+					режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет по запросу Администрации при 
+					регистрации на сайте Лестницы в Самаре или при подписке на информационную e-mail рассылку.</p>
+					
+					<p>3.2. Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются 
+					Пользователем путём заполнения форм на сайте Лестницы в Самаре и включают в себя следующую информацию:<br>
+					3.2.1. фамилию, имя, отчество Пользователя;<br>
+					3.2.2. контактный телефон Пользователя;<br>
+					3.2.3. адрес электронной почты (e-mail)<br>
+					3.2.4. место жительство Пользователя (при необходимости)<br>
+					3.2.5. фотографию (при необходимости)</p>
+			
+					<p>3.3. Сайт по изготовлению лестниц защищает Данные, которые автоматически передаются при посещении страниц:<br>
+					- IP адрес;<br>
+					- информация из cookies;<br>
+					- информация о браузере <br>
+					- время доступа;<br>
+					- реферер (адрес предыдущей страницы).</p>
+			
+					<p>3.3.1. Отключение cookies может повлечь невозможность доступа к частям сайта <!--?php echo Лестницы в Самаре ?-->, требующим 
+					авторизации.</p>
+			
+					<p>3.3.2. Сайт по изготовлению лестниц осуществляет сбор статистики об IP-адресах своих посетителей. Данная информация 
+					используется с целью предотвращения, выявления и решения технических проблем.</p>
+					<p>3.4. Любая иная персональная информация неоговоренная выше (история посещения, используемые браузеры, операционные 
+					системы и т.д.) подлежит надежному хранению и нераспространению, за исключением случаев, 
+					предусмотренных в п.п. 5.2. настоящей Политики конфиденциальности.</p>
+					
+					<h2>4. Цели сбора персональной информации пользователя</h2>
+					
+					<p>4.1. Персональные данные Пользователя Администрация может использовать в целях:<br>
+					4.1.1. Идентификации Пользователя, зарегистрированного на сайте Лестницы в Самаре для его дальнейшей авторизации.<br>
+			
+					4.1.2. Предоставления Пользователю доступа к персонализированным данным сайта Лестницы в Самаре.<br>
+			
+					4.1.3. Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования 
+					сайта Лестницы в Самаре, обработки запросов и заявок от Пользователя.<br>
+			
+					4.1.4. Определения места нахождения Пользователя для обеспечения безопасности, предотвращения мошенничества.<br>
+			
+					4.1.5. Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.<br>
+			
+					4.1.6. Создания учетной записи для использования частей сайта Лестницы в Самаре, если Пользователь дал согласие на 
+					создание учетной записи.<br>
+			
+					4.1.7. Уведомления Пользователя по электронной почте.<br>
+			
+					4.1.8. Предоставления Пользователю эффективной технической поддержки при возникновении проблем, связанных с использованием 
+					сайта Лестницы в Самаре.<br>
+			
+					4.1.9. Предоставления Пользователю с его согласия специальных предложений, новостной рассылки и иных сведений от имени 
+					сайта Лестницы в Самаре.</p>
+					
+					<h2>5. Способы и сроки обработки персональной информации</h2>
+					
+					<p>5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в 
+					том числе в информационных системах персональных данных с использованием средств автоматизации или без использования 
+					таких средств.</p>
+					<p>5.2. Персональные данные Пользователя могут быть переданы уполномоченным органам государственной власти Российской 
+					Федерации только по основаниям и в порядке, установленным законодательством Российской Федерации.</p>
+					<p>5.3. При утрате или разглашении персональных данных Администрация вправе не информировать Пользователя об утрате или 
+					разглашении персональных данных.</p>
+					<p>5.4. Администрация принимает необходимые организационные и технические меры для защиты персональной информации 
+					Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, 
+					а также от иных неправомерных действий третьих лиц.</p>
+					<p>5.5. Администрация совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных 
+					отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.</p>
+					
+					<h2>6. Права и обязанности сторон</h2>
+					
+					<p><strong>6.1. Пользователь вправе:</strong></p>
+					<p>6.1.1. Принимать свободное решение о предоставлении своих персональных данных, необходимых для использования 
+					сайта Лестницы в Самаре, и давать согласие на их обработку.</p>
+			
+					<p>6.1.2. Обновить, дополнить предоставленную информацию о персональных данных в случае изменения данной информации.</p>
+					
+					<p>6.1.3. Пользователь имеет право на получение у Администрации информации, касающейся обработки его персональных данных, 
+					если такое право не ограничено в соответствии с федеральными законами. Пользователь вправе требовать от Администрации
+					уточнения его персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, 
+					устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также 
+					принимать предусмотренные законом меры по защите своих прав. Для этого достаточно уведомить Администрацию по указаному E-mail адресу.</p>
+			
+					<p><strong>6.2. Администрация обязана:</strong></p>
+					<p>6.2.1. Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики 
+					конфиденциальности.</p>
+			
+					<p>6.2.2. Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного 
+					разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование, либо разглашение иными возможными 
+					способами переданных персональных данных Пользователя, за исключением п.п. 5.2. настоящей Политики Конфиденциальности.</p>
+			
+					<p>6.2.3. Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, 
+					обычно используемого для защиты такого рода информации в существующем деловом обороте.</p>
+			
+					<p>6.2.4. Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента 
+					обращения или запроса Пользователя, или его законного представителя либо уполномоченного органа по защите прав 
+					субъектов персональных данных на период проверки, в случае выявления недостоверных персональных данных или 
+					неправомерных действий.</p>
+					
+					<h2>Ответственность сторон</h2>
+					<p>7.1. Администрация, не исполнившая свои обязательства, несёт ответственность за убытки, 
+					понесённые Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством 
+					Российской Федерации, за исключением случаев, предусмотренных п.п. 5.2. и 7.2. настоящей Политики Конфиденциальности.</p>
+			
+					<p>7.2. В случае утраты или разглашения Конфиденциальной информации Администрация не несёт ответственность, 
+					если данная конфиденциальная информация:<br>
+					7.2.1. Стала публичным достоянием до её утраты или разглашения.<br>
+					7.2.2. Была получена от третьей стороны до момента её получения Администрацией Ресурса.<br>
+					7.2.3. Была разглашена с согласия Пользователя.</p>
+			
+					<p>7.3. Пользователь несет полную ответственность за соблюдение требований законодательства РФ, в том числе законов о 
+					рекламе, о защите авторских и смежных прав, об охране товарных знаков и знаков обслуживания, но не ограничиваясь 
+					перечисленным, включая полную ответственность за содержание и форму материалов.</p>
+			
+					<p>7.4. Пользователь признает, что ответственность за любую информацию (в том числе, но не ограничиваясь: файлы с данными, 
+					тексты и т. д.), к которой он может иметь доступ как к части сайта Лестницы в Самаре, несет лицо, предоставившее 
+					такую информацию.</p>
+					
+					<p>7.5. Пользователь соглашается, что информация, предоставленная ему как часть сайта Лестницы в Самаре, может 
+					являться объектом интеллектуальной собственности, права на который защищены и принадлежат другим Пользователям, 
+					партнерам или рекламодателям, которые размещают такую информацию на сайте Лестницы в Самаре. <br>
+					Пользователь не вправе вносить изменения, передавать в аренду, передавать на условиях займа, продавать, распространять 
+					или создавать производные работы на основе такого Содержания (полностью или в части), за исключением случаев, когда такие 
+					действия были письменно прямо разрешены собственниками такого Содержания в соответствии с условиями отдельного соглашения.</p>
+			
+					<p>7.6. В отношение текстовых материалов (статей, публикаций, находящихся в свободном публичном доступе на 
+					сайте Лестницы в Самаре) допускается их распространение при условии, что будет дана ссылка 
+					на Сайт по изготовлению лестниц.</p>
+					
+					<p>7.7. Администрация не несет ответственности перед Пользователем за любой убыток или ущерб, понесенный Пользователем 
+					в результате удаления, сбоя или невозможности сохранения какого-либо Содержания и иных коммуникационных данных, 
+					содержащихся на сайте Лестницы в Самаре или передаваемых через него.</p>
+			
+					<p>7.8. Администрация не несет ответственности за любые прямые или косвенные убытки, произошедшие из-за: использования 
+					либо невозможности использования сайта, либо отдельных сервисов; несанкционированного доступа к коммуникациям 
+					Пользователя; заявления или поведение любого третьего лица на сайте.</p>
+					
+					<p>7.9. Администрация не несет ответственность за какую-либо информацию, размещенную пользователем на 
+					сайте Лестницы в Самаре, включая, но не ограничиваясь: информацию, защищенную авторским правом, без прямого 
+					согласия владельца авторского права.</p>
+					
+					<h2>8. Разрешение споров</h2>
+					
+					<p>8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем и Администрацией, обязательным 
+					является предъявление претензии (письменного предложения или предложения в электронном виде о добровольном урегулировании 
+					спора).</p>
+			
+					<p>8.2. Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно или в электронном виде 
+					уведомляет заявителя претензии о результатах рассмотрения претензии.</p>
+			
+					<p>8.3. При не достижении соглашения спор будет передан на рассмотрение Арбитражного суда г. Самара.</p>
+			
+					<p>8.4. К настоящей Политике конфиденциальности и отношениям между Пользователем и Администрацией 
+					применяется действующее законодательство Российской Федерации.</p>
+					
+					<h2>9. Дополнительные условия</h2>
+					<p>9.1. Администрация вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.</p>
+			
+					<p>9.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения на сайте Лестницы в Самаре, если 
+					иное не предусмотрено новой редакцией Политики конфиденциальности.</p>
+			
+					<p>9.3. Все предложения или вопросы касательно настоящей Политики конфиденциальности следует сообщать по 
+					адресу: sammetok@yandex.ru</p>
+					
+					<p>9.4. Действующая Политика конфиденциальности размещена на странице по адресу https://лестницы63.рф/privacy-policy/</p>
+			
+					<p>Обновлено: 08 Июля 2022 года</p>
+					<p>г. Самара, </p></div>
+			</div>
+		</section>
+
+	</main>
+
+	<footer class="footer bg-gray-800 text-gray-300 font-normal py-20 flex-shrink-0">
+		<div class="container">
+			<div class="grid lg:grid-cols-3 gap-10 lg:gap-5">
+
+				<div class="flex flex-col justify-between gap-5">
+					<div>
+						<a href="#" class="lg:w-36 block mb-6">
+							<img src="../img/no-logo.png" alt="" class="max-w-full">
+						</a>
+						<p class="text-base">Компания &laquo;Лестницывсамаре&raquo; изготавливает<br class="hidden lg:block">
+							надежные металлические лестницы</p>
+					</div>
+					<div class="text-xs text-gray-400">
+						&copy; 2022 "Лестницы в Самаре"
+					</div>
+				</div>
+
+				<div>
+					<h3 class="uppercase font-bold mb-5">Разделы сайта</h3>
+					<ul class="flex flex-col gap-3">
+						<li><a href="#about" class="transition-all hover:underline hover:text-gray-200">О нас</a></li>
+						<li><a href="#types" class="transition-all hover:underline hover:text-gray-200">Типы лестниц</a></li>
+						<li><a href="#works" class="transition-all hover:underline hover:text-gray-200">Работы</a></li>
+						<li><a href="#contacts" class="transition-all hover:underline hover:text-gray-200">Контакты</a></li>
+						<li><a href="/privacy-policy/" class="transition-all hover:underline hover:text-gray-200">Политика
+								конфиденциальности</a></li>
+					</ul>
+				</div>
+
+				<div>
+					<h3 class="uppercase font-bold mb-5">Контакты</h3>
+					<ul class="flex flex-col gap-5">
+						<template x-for="phone in phones" :key="phone.id">
+							<li>
+								<a :href="'tel:'+phone.phone.replace(/[^0-9]/g,'')" class="flex items-center gap-2">
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24"
+										stroke="currentColor" stroke-width="2">
+										<path stroke-linecap="round" stroke-linejoin="round"
+											d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+									</svg>
+									<span x-text="phone.phone"></span>
+								</a>
+							</li>
+						</template>
+						<li>
+							<a :href="'mailto:'+email" class="flex items-center gap-2">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round"
+										d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+									</path>
+								</svg>
+								<span x-text="email"></span>
+							</a>
+						</li>
+						<li class="flex items-center gap-2" id="contacts">
+							<svg class="w-6 h-6 text-gray-300" fill="currentColor" viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd"
+									d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+									clip-rule="evenodd"></path>
+							</svg>
+							<span x-text="address"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- overlay -->
+	<div class="overflow-y-auto bg-black bg-opacity-80" x-show="$store.state.isModalOpen"
+		:class="{ 'fixed inset-0 z-50 flex items-center justify-center': $store.state.isModalOpen }" x-cloak>
+		<!-- dialog -->
+		<div class="max-w-[450px] w-full bg-white shadow-2xl m-4 my-12 sm:m-8 px-5 p-4 sm:py-8 relative z-50"
+			x-show="$store.state.isModalOpen" @click.away="$store.state.isModalOpen = false">
+			<button class="absolute top-1 right-1 text-3xl p-1 px-3"
+				@click="$store.state.isModalOpen = false;">&times;</button>
+
+			<h3 class="text-center mb-5 text-2xl font-semibold" x-ref="modalTitle"></h3>
+
+			<form>
+				<input type="email" tabindex="-1" name="Email" placeholder="mail@example.com" class="h-0 opacity-0 absolute">
+				<input type="hidden" name="form" x-ref="formInput">
+				<input type="hidden" name="type" x-ref="typeInput">
+				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5">
+					Имя
+					<input type="text" name="name"
+						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
+						placeholder="Ваше имя">
+				</label>
+				<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-8" id="phone">
+					Телефон *
+					<input type="text" name="phone"
+						class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
+						placeholder="+7 (999) 123-45-67" required>
+					<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
+				</label>
+
+				<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
+
+				<div class="form-group block text-xs md:text-sm w-full mb-5" id="agree">
+					<label class="fake-checkbox flex">
+						<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
+						<span
+							class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
+						<span class="block">
+							Согласен на <a href="/privacy-policy/" class="underline transition-all duration-700 hover:no-underline"
+								target="_blank">обработку
+								персональных данных</a>
+						</span>
+					</label>
+					<small class="text-left text-xs text-red-600 mt-1 hidden">Чтобы продолжить установите флажок</small>
+				</div>
+				<button type="submit" class="w-full bg-accent text-white text-base px-2 py-3 mb-5">Отправить</button>
+			</form>
+
+		</div><!-- /dialog -->
+	</div><!-- /overlay -->
+
+	<!-- overlay -->
+	<div class="overflow-y-auto bg-black bg-opacity-80" id="response_modal" x-show="$store.state.isResponseModalOpen"
+		:class="{ 'fixed inset-0 z-50 flex items-start justify-center': $store.state.isResponseModalOpen }">
+		<!-- dialog -->
+		<div class="max-w-[450px] w-full bg-white shadow-2xl m-4 my-12 sm:m-8 px-5 p-4 sm:py-8 relative z-50"
+			x-show="$store.state.isResponseModalOpen" @click.away="$store.state.isResponseModalOpen = false">
+			<button class="absolute top-1 right-1 text-3xl p-1 px-3"
+				@click="$store.state.isResponseModalOpen = false;">&times;</button>
+			<h3 class="text-2xl text-center mb-5"></h3>
+
+			<div class="content text-center">
+				<p></p>
+			</div>
+
+
+		</div><!-- /dialog -->
+	</div><!-- /overlay -->
+
+	<script src="../js/scripts.js"></script>
+</body>
+
+</html>
