@@ -8,7 +8,7 @@ document.addEventListener('alpine:init', () => {
 			{ id: 2, phone: '8 (846) 990 02 77' },
 		],
 		email: 'sammetok@yandex.ru',
-		address: 'Самара, ул. Революционная, 101 А',
+		address: 'Самара, ул. Аэропорт-2, лит Ж',
 		lestnicy: lestnicy,
 		galary: galary,
 		typeModalShow(id) {
