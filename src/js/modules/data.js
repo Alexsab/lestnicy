@@ -14,7 +14,7 @@ document.addEventListener('alpine:init', () => {
 		typeModalShow(id) {
 			const type = lestnicy.find((t) => t.id === id)
 			const title = type.title ? type.title : 'Лестница № ' + type.id
-			this.$refs.typeImgLink.href = `img/types/${type.id}.png`
+			// this.$refs.typeImgLink.href = `img/types/${type.id}.png`
 			this.$refs.typeImg.src = `img/types/thumbs/${type.id}.png`
 			this.$refs.typeImg.alt = title
 			this.$refs.typeTitle.innerText = title
