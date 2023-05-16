@@ -44,6 +44,9 @@ module.exports = {
 			fontFamily: {
 				sans: ['MS', ...defaultTheme.fontFamily.sans],
 			},
+			transitionProperty: {
+				// 'height': 'height',
+			},
 		},
 	},
 }
