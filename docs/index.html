@@ -372,7 +372,7 @@
 
 						<template x-for="(item, idx) in calcFormItems" :key="idx">
 
-							<label class="col-span-6 md:col-span-3">
+							<label class="col-span-6 md:col-span-3" data-aos="fade-up" :data-aos-delay="100*idx">
 								<h4 class="font-bold md:mb-4" x-text="item.label"></h4>
 								<template x-for="(val, idx) in item.values" :key="idx">
 									<div class="form-group block w-full mt-2">
@@ -393,7 +393,7 @@
 
 						</template>
 
-						<div class="col-span-6 md:col-span-3">
+						<div class="col-span-6 md:col-span-3" data-aos="fade-up" data-aos-delay="500">
 							<label class="form-group block font-bold mb-5">
 								Имя
 								<input type="text" name="name" class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl" placeholder="Ваше имя">
@@ -417,7 +417,7 @@
 							</div>
 						</div>
 
-						<div class="col-span-6 md:col-start-2 md:col-span-4">
+						<div class="col-span-6 md:col-start-2 md:col-span-4" data-aos="fade-up">
 							<button type="submit" class="w-full bg-accent text-white text-base px-2 py-3 mb-5" data-btn="Получить расчет">Получить расчет</button>
 						</div>
 
@@ -472,6 +472,45 @@
 					</template>
 
 				</div>
+
+			</div>
+		</section>
+
+		<section id="callback-form" class="section bg-accent text-white pt-28">
+			<div class="container">
+				<h2 class="mb-2 opacity-0" data-aos="fade-up">Остались вопросы?</h2>
+				<h3 class="descr-section lg:w-3/4 mx-auto mb-6 sm:mb-10 opacity-0" data-aos="fade-up" data-aos-delay="50">Оставьте свои данные и мы свяжемся с вами в ближайшее время!</h3>
+
+				<form>
+					<input type="email" tabindex="-1" name="Email" placeholder="mail@example.com" class="h-0 opacity-0 absolute">
+					<input type="hidden" name="form" value="Форма - остались вопросы">
+					<div class="grid grid-cols-3 items-end gap-5">
+
+						<label class="col-span-3 md:col-span-1 form-group block font-bold" data-aos="fade-up" data-aos-delay="100">
+							Имя
+							<input type="text" name="name" class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder:text-white focus:shadow-2xl bg-white/20" placeholder="Ваше имя">
+						</label>
+						<label class="col-span-3 md:col-span-1 form-group block font-bold relative" id="phone" data-aos="fade-up" data-aos-delay="200">
+							Телефон *
+							<input type="text" name="phone" class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder:text-white focus:shadow-2xl bg-white/20" placeholder="+7 (999) 123-45-67" required="">
+							<small class="md:absolute md:left-0 md:-bottom-6 text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
+						</label>
+						<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
+						<button type="submit" class="col-span-3 md:col-span-1 w-full bg-white text-gray-800 text-base h-[50px] transition-colors hover:bg-white/90 order-4 md:order-3" data-aos="fade-up" data-aos-delay="300">Отправить</button>
+						<div class="form-group block text-xs md:text-sm w-full col-span-3 order-3 md:order-4" id="agree" data-aos="fade-up" data-aos-delay="300">
+							<label class="fake-checkbox flex items-center">
+								<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
+								<span class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-white relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-white after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
+								<span class="block mt-0.5">
+									Согласен на <a href="/privacy-policy/" class="underline transition-all duration-700 hover:no-underline" target="_blank">обработку
+										персональных данных</a>
+								</span>
+							</label>
+							<small class="text-left text-xs text-red-600 mt-1 hidden">Чтобы продолжить установите флажок</small>
+						</div>
+
+					</div>
+				</form>
 
 			</div>
 		</section>
