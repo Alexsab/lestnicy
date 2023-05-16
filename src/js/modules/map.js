@@ -12,7 +12,7 @@ let maps = [
 	balloonContentBody: '<h6 class="text-lg"><b>Компания "Лестницы в Самаре"</b></h6><br> \
 	<a href="tel:89272600277" class="text-base">8 (927) 260 02 77</a><br> \
 	<a href="tel:88469900277" class="text-base">8 (846) 990 02 77</a><br><br> \
-	<a href="https://yandex.ru/maps/?from=api-maps&ll=38.937629%2C45.017397&mode=routes&origin=jsapi_2_1_79&rtext=~45.017397%2C38.937629&rtt=auto&ruri=~&z=17"  target="_blank" class="dealer-phone">📍 Как добраться</a><br>',
+	<a href="https://yandex.ru/maps/51/samara/?from=api-maps&ll=50.376757%2C53.251193&mode=routes&origin=jsapi_2_1_79&rtext=~53.249899%2C50.374962&rtt=auto&ruri=~&z=17"  target="_blank" class="dealer-phone">📍 Как добраться</a><br>',
 	balloonContentFooter: '',
 	hintContent: 'Купить лестницу на второй этаж под ключ в Самаре'
 },
