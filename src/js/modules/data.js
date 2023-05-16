@@ -1,6 +1,7 @@
 import lestnicy from './lestnicy'
 import galary from './galary'
 import faqs from './faqs'
+import tags from './tags'
 
 document.addEventListener('alpine:init', () => {
 	Alpine.data('data', () => ({
@@ -10,9 +11,10 @@ document.addEventListener('alpine:init', () => {
 		],
 		email: 'sammetok@yandex.ru',
 		address: 'Самара, ул. Аэропорт-2, лит Ж',
-		lestnicy: lestnicy,
-		galary: galary,
-		faqs: faqs,
+		lestnicy,
+		galary,
+		faqs,
+		tags,
 		typeModalShow(id) {
 			const type = lestnicy.find((t) => t.id === id)
 			const title = type.title ? type.title : 'Лестница № ' + type.id

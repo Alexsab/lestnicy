@@ -311,7 +311,7 @@
 
 		<section id="types" class="section overflow-hidden pt-28">
 			<div class="container">
-				<h2 class="mb-5 opacity-0" data-aos="fade-up">Типы лестниц на&nbsp;металлическом каркасе</h2>
+				<h2 class="mb-14 opacity-0" data-aos="fade-up">Типы лестниц на&nbsp;металлическом каркасе</h2>
 				<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6">
 
 					<template x-for="l in lestnicy" :key="l.id">
@@ -414,23 +414,18 @@
 			</div>
 		</section>
 
-		<section id="search" class="section pt-28">
+		<section id="tags" class="section pt-28">
 			<div class="container">
-				<h2 class="mb-5 opacity-0" data-aos="fade-up">Чаще всего ищут</h2>
+				<h2 class="mb-14 opacity-0" data-aos="fade-up">Чаще всего ищут</h2>
 
 				<div class="flex flex-wrap gap-3 sm:gap-5">
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up">лестница на второй этаж</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="100">лестница на второй этаж в частном доме</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="150">чердачная лестница</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="200">лестница трехсекционная</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="250">винтовая лестница</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="300">лестница с площадкой</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="350">лестница двухсекционная</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="400">маршевая лестница</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="450">лестница на металлическом каркасе</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="500">лестница на металлическом косоуре</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="550">лестница поворотная на тетиве</a>
-					<a href="https://xn--63-mlcmnn1ai2b0c.xn--p1ai/" class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up" data-aos-delay="600">лестница на второй этаж на тетиве</a>
+					<template x-for="(tag, idx) in tags" :key="idx">
+						<a 
+							:href="tag.url" 
+							class="sm:whitespace-nowrap underline font-normal text-sm sm:text-lg transition-all hover:text-gray-500 hover:no-underline" data-aos="fade-up"
+							:data-aos-delay="40*idx"
+							x-text="tag.title"></a>
+					</template>
 				</div>
 
 			</div>
