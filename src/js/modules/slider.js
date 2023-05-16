@@ -46,3 +46,24 @@ const slides = document.querySelectorAll('.banner-slide');
 if (slides.length > 1) loop = true;
 
 initSlider(0, loop);
+
+
+const reviewsSlider = new Swiper('.reviews-slider', {
+	slidesPerView: 2,
+	speed: 1000,
+	spaceBetween: 50,
+	autoHeight: true,
+	pagination: {
+		el: '.slider-pagination',
+		type: 'bullets', //'bullets' | 'fraction' | 'progressbar' | 'custom'
+		clickable: true,
+	},
+	breakpoints: {
+		320: {
+			slidesPerView: 1,
+		},
+		768: {
+			slidesPerView: 2,
+		},
+	}
+})
