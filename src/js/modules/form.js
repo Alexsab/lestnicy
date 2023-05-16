@@ -66,7 +66,7 @@ document.querySelectorAll("form").forEach(function(form) {
 		})
 		.then(res => res.json())
 		.then(await function(data){
-			btn.innerHTML = 'Отправить';
+			btn.innerHTML = btn.dataset.btn ? btn.dataset.btn : 'Отправить';
 			btn.removeAttribute('disabled');
 			if (data.answer == 'required') {
 				showErrorMes(form, data.field, data.message);
@@ -81,7 +81,7 @@ document.querySelectorAll("form").forEach(function(form) {
 		})
 		.catch(await function(error) {
 			console.error("Ошибка отправки данных формы: " + error);
-			btn.innerHTML = 'Отправить';
+			btn.innerHTML = btn.dataset.btn ? btn.dataset.btn : 'Отправить';
 			btn.removeAttribute('disabled');
 			Alpine.store('state').isTypeModalOpen = false;
 			Alpine.store('state').isModalOpen = false;

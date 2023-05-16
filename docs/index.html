@@ -361,7 +361,69 @@
 		<section id="calc" class="section pt-28">
 			<div class="container">
 				<h2 class="mb-5 opacity-0" data-aos="fade-up">Калькулятор стоимости металлической лестницы</h2>
-				<div class="descr-section lg:w-1/2 mx-auto mb-6 sm:mb-10 opacity-0" data-aos="fade-up" data-aos-delay="50">Заполните форму ниже и&nbsp;мы&nbsp;назовем вам стоимость лестницы!</div>
+				<div class="descr-section lg:w-1/2 mx-auto mb-8 sm:mb-14 opacity-0" data-aos="fade-up" data-aos-delay="50">Заполните форму ниже и&nbsp;мы&nbsp;назовем вам стоимость лестницы!</div>
+
+				<form class="max-w-3xl mx-auto">
+
+					<input type="email" tabindex="-1" name="Email" placeholder="mail@example.com" class="h-0 opacity-0 absolute">
+					<input type="hidden" name="form" value="Калькулятор стоимости лестницы">
+
+					<div class="grid grid-cols-6 gap-5 md:gap-x-5 md:gap-y-7">
+
+						<template x-for="(item, idx) in calcFormItems" :key="idx">
+
+							<label class="col-span-6 md:col-span-3">
+								<h4 class="font-bold md:mb-4" x-text="item.label"></h4>
+								<template x-for="(val, idx) in item.values" :key="idx">
+									<div class="form-group block w-full mt-2">
+										<label class="fake-checkbox flex flex-nowrap gap-2">
+											<input 
+												type="radio" 
+												class="absolute w-0 h-0 opacity-0" 
+												:name="item.name"
+												:value="val"
+												:checked="idx === 0"
+											>
+											<span class="block mt-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 rounded-full border border-accent relative after:content-[''] after:rounded-full after:absolute after:w-[10px] after:h-[10px] after:bg-accent after:left-[2px] after:top-[2px] after:transition-opacity after:opacity-0"></span>
+											<span class="font-normal" x-text="val"></span>
+										</label>										
+									</div>
+								</template>
+							</label>
+
+						</template>
+
+						<div class="col-span-6 md:col-span-3">
+							<label class="form-group block font-bold mb-5">
+								Имя
+								<input type="text" name="name" class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl" placeholder="Ваше имя">
+							</label>
+							<label class="form-group block font-bold mb-5" id="phone">
+								Телефон *
+								<input type="text" name="phone" class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl" placeholder="+7 (999) 123-45-67" required="">
+									<small class="text-left text-xs text-red-600 mt-1 font-normal hidden">Поле обязательно для заполнения</small>
+							</label>
+							<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
+							<div class="form-group block text-xs md:text-sm w-full" id="agree">
+								<label class="fake-checkbox flex">
+									<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
+									<span class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
+									<span class="block">
+										Согласен на <a href="/privacy-policy/" class="underline transition-all duration-700 hover:no-underline" target="_blank">обработку
+											персональных данных</a>
+									</span>
+								</label>
+								<small class="text-left text-xs text-red-600 mt-1 hidden">Чтобы продолжить установите флажок</small>
+							</div>
+						</div>
+
+						<div class="col-span-6 md:col-start-2 md:col-span-4">
+							<button type="submit" class="w-full bg-accent text-white text-base px-2 py-3 mb-5" data-btn="Получить расчет">Получить расчет</button>
+						</div>
+
+					</div>
+				</form>
+
 			</div>
 		</section>
 
