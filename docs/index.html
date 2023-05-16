@@ -242,15 +242,15 @@
 					<form class="w-full mt-5 flex flex-wrap justify-between lg:justify-start lg:flex-col">
 						<input type="email" name="email" tabindex="-1" class="h-0 opacity-0 absolute">
 						<input type="hidden" name="form" value="Баннер">
-						<div class="w-full flex flex-wrap items-end justify-between lg:block">
+						<div class="w-full flex flex-wrap md:gap-y-5 items-end justify-between lg:block">
 
-							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-5">
+							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-5 order-1">
 								Имя
 								<input type="text" name="name"
 									class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
 									placeholder="Ваше имя">
 							</label>
-							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-5" id="phone">
+							<label class="form-group w-full md:w-[32%] lg:w-full block text-base font-bold mb-5 md:mb-0 lg:mb-5 order-2" id="phone">
 								Телефон *
 								<input type="tel" name="phone"
 									class="text-base px-5 py-3 border border-sand block rounded-0 outline-none w-full mt-2 duration-300 placeholder-gray-600::placeholder focus:shadow-2xl"
@@ -260,12 +260,12 @@
 
 							<input type="checkbox" name="subscribe" class="w-0 h-0 opacity-0 absolute">
 
-							<div class="form-group block text-xs md:text-sm mb-8 w-full" id="agree">
+							<div class="form-group block text-xs md:text-sm mt-5 md:mt-0 lg:mt-0 lg:mb-8 w-full order-4 lg:order-3" id="agree">
 								<label class="fake-checkbox flex">
 									<input type="checkbox" class="absolute w-0 h-0 opacity-0" name="agree">
 									<span
 										class="block mr-1 cursor-pointer w-[16px] h-[16px] flex-shrink-0 border border-accent relative after:content-[''] after:absolute after:w-[12px] after:h-[12px] after:bg-accent after:left-[1px] after:top-[1px] after:transition-opacity after:opacity-0"></span>
-									<span class="block -mt-0.5">
+									<span class="block md:-mt-0.5">
 										Согласен на <a href="/privacy-policy/"
 											class="underline transition-all duration-700 hover:no-underline">обработку
 											персональных данных</a>
@@ -275,7 +275,7 @@
 							</div>
 
 							<button type="submit"
-								class="text-base w-full md:w-[32%] lg:w-full text-white font-bold px-5 py-3 lg:py-4 border border-transparent block rounded-0 outline-none lg:mt-7 duration-500 bg-accent hover:bg-opacity-95">Отправить</button>
+								class="text-base w-full md:w-[32%] lg:w-full text-white font-bold px-5 py-3 lg:py-4 border border-transparent block rounded-0 outline-none lg:mt-7 duration-500 bg-accent hover:bg-opacity-95 order-3 lg:order-4">Отправить</button>
 
 						</div>
 
