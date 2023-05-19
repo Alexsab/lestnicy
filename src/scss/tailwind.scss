@@ -63,8 +63,10 @@ strong{
 	@apply font-semibold;
 }
 
-.section{
+.section:not(:last-child){
 	@apply py-10 md:py-20;
+}
+.section{
 	h2{
 		font-size: calc($index * 2.1);
 		text-align: center;
