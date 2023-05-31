@@ -1,5 +1,6 @@
 import lestnicy from './lestnicy'
 import galary from './galary'
+import works from './works'
 import faqs from './faqs'
 import tags from './tags'
 import calcFormItems from './calc-form'
@@ -14,9 +15,11 @@ document.addEventListener('alpine:init', () => {
 		address: 'Самара, ул. Аэропорт-2, лит Ж',
 		lestnicy,
 		galary,
+		works,
 		faqs,
 		tags,
 		calcFormItems,
+		today: new Date(),
 		typeModalShow(id) {
 			const type = lestnicy.find((t) => t.id === id)
 			const title = type.title ? type.title : 'Лестница № ' + type.id
