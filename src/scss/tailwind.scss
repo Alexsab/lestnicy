@@ -28,10 +28,6 @@
 	@apply w-3 h-3 bg-gray-300 opacity-100 transition-colors hover:bg-gray-400;
 }
 
-.slider-pagination.swiper-pagination{
-	// @apply -bottom-6;
-}
-
 .slider-pagination .swiper-pagination-bullet-active{
 	@apply bg-accent;
 }

@@ -1,3 +1,4 @@
+import works from './works'
 import Swiper, {Lazy, Pagination, Navigation, EffectFade} from 'swiper';
 
 Swiper.use([Lazy, Pagination, Navigation, EffectFade]);
@@ -48,7 +49,7 @@ if (slides.length > 1) loop = true;
 initSlider(0, loop);
 
 
-const reviewsSlider = new Swiper('.reviews-slider', {
+new Swiper('.reviews-slider', {
 	slidesPerView: 2,
 	speed: 1000,
 	spaceBetween: 50,
@@ -67,3 +68,26 @@ const reviewsSlider = new Swiper('.reviews-slider', {
 		},
 	}
 })
+
+setTimeout(() => {
+	works.forEach(work => {
+		new Swiper('.work-slider-'+work.id, {
+			preloadImages: false,
+			lazy: true,
+			// loop: true,
+			autoHeight: false,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			breakpoints: {
+				320: {
+					autoHeight: true,
+				},
+				768: {
+					autoHeight: false,
+				},
+			}
+		})
+	})
+}, 0)
