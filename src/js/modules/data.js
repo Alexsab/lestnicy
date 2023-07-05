@@ -8,10 +8,9 @@ import calcFormItems from './calc-form'
 document.addEventListener('alpine:init', () => {
 	Alpine.data('data', () => ({
 		phones: [
-			{ id: 1, phone: '8 (927) 260 02 77' },
-			{ id: 2, phone: '8 (846) 990 02 77' },
+			{ id: 1, phone: '+7 905 271 33 39' },
 		],
-		email: 'sammetok@yandex.ru',
+		email: '',
 		address: 'Самара, ул. Аэропорт-2, лит Ж',
 		lestnicy,
 		galary,
